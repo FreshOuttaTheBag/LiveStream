@@ -35,32 +35,23 @@ def makeTeam():
 
 
 def areYouSure():
-  global done
-  choices=[]
-  print("\nYou will start Text-Based Trail with \n1.) Wagon Name: %s" % wagon.name)
-  choices.append('1')
-  for x in range(len(team)):
-    print("%d.) %s" % (x+2,team[x].name))
-    choices.append(str(x+2))
-  choice = input("Enter the number of the name you would like to change. \nOtherwise, enter \"yes\"\n")
-  try:
-    choices.index(choice)
-  except:
-    print("Enter a number seen above, or enter \"yes\"")
-  else:
+  done = False
+  while done != True:
+    choices=[]
+    print("\nYou will start Text-Based Trail with \n1.) Wagon Name: %s" % wagon.name)
+    choices.append('1')
+    for x in range(len(team)):
+      print("%d.) %s" % (x+2,team[x].name))
+      choices.append(str(x+2))
+    choice = input("Enter the number of the name you would like to change. \nOtherwise, enter \"yes\"\n")
     if choice == '1':
       wagon.name = input("Enter the new name of your Wagon.\nOld Wagon Name: %s\n" % wagon.name)
-    elif choice.lower != "yes" or choice.lower !="y":
-      team[int(choice)-2].name = input("Enter a new name for your team member.\nOld name: %s\n" % team[int(choice)-2].name)
-    elif choice.lower == 'yes' or choice.lower == 'y' :
-      done = True
-  return done
-
+    else:
+      if choice.lower() == 'yes' or choice.lower() == 'y':
+        done = True
+      elif choice.isdigit():
+        team[int(choice)-2].name = input("Enter a new name for your team member.\nOld name: %s\n" % team[int(choice)-2].name)
 
 
 makeTeam()
-done = False
-while done != True:
-  done = areYouSure()
-  if done == True:
-    break
+areYouSure()
