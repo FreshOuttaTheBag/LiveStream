@@ -54,7 +54,7 @@ def areYouSure():
       team[int(choice)-2].name = input("Enter a new name for your team member.\nOld name: %s\n" % team[int(choice)-2].name)
     elif choice.lower == 'yes' or choice.lower == 'y' :
       done = True
-return done
+  return done
 
 
 
