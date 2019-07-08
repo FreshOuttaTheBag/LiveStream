@@ -1,3 +1,4 @@
+import os
 class Person:
   def __init__(self,name,health,disease,hunger):
     self.name = name
@@ -9,8 +10,12 @@ class Wagon:
   def __init__(self,name,brokenPart):
     self.name = name
     self.brokenPart = brokenPart
-#inventory = []
+#inventory
+
 team=[]
+inventory = {
+  "Dollars" : 1600,
+}
 wagon = Wagon(None,None)
 
 def makeTeam():
@@ -24,7 +29,7 @@ def makeTeam():
     name = input("Enter the name of the %s person on your team\n"%choices[i])
     for x in team:
       if x.name == name:
-        print("You can't use the same name twice in your team\n")
+        print("You can\'t use the same name twice in your team\n")
         cont = True
     if cont == True:
       continue
@@ -52,6 +57,53 @@ def areYouSure():
       elif choice.isdigit():
         team[int(choice)-2].name = input("Enter a new name for your team member.\nOld name: %s\n" % team[int(choice)-2].name)
 
+def beforeJourney():
+  print("A 100% totally long journey awaits you, you may want to buy some supplies")
+  print("What you would like to do.")
+  print("1.) View your inventory")
+  print("2.) Go to the store")
+  print("3.) Start your journey")
+  print("4.) View the map")
+  choice = input("Enter the number of what you would like to do\n")
+  if choice == '1':
+    viewInventory(beforeJourney)
+  elif choice == '2':
+    os.system('clear')
+    store(previousFunc)
+    
+    
+  
+
+storeDict = {
+  "Ox" : 400,
+  "Bullets" : 20,
+  "Food (100 lbs)" : 100,
+  "Clothing (sets)" : 10,
+  "Spare Axel" : 50,
+  "Spare Wheel" : 50,
+  "Spare Toungue" : 50
+}
+def store(previousFunc):
+  print("What would you like to buy?\n")
+  print("It\'s recommended to bring 6 oxen, 3 pairs of clothing per person, 50 bullets, 200 lbs of food per person\n")
+  print("Item : Price")
+  for x,y in storeDict.items():
+    print(x,y)
+  choice = input('When you\'re done, enter \"yes\"\n')
+  if choice.lower == 'yes' or choice.lower == 'y':
+    previousFunc()
+  
+  
+
+def  viewInventory(previousFunc):
+  print(inventory)
+  i = input("\nPress the enter key when you are done")
+  os.system('clear')
+  previousFunc()
+  
 
 makeTeam()
+os.system('clear')
 areYouSure()
+os.system('clear')
+beforeJourney()
